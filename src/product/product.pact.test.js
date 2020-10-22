@@ -40,7 +40,7 @@ describe("Pact Verification", () => {
       ], // the new way of specifying which pacts to verify
       pactBrokerUrl: process.env.PACT_BROKER_BASE_URL,
       enablePending: false,
-      includeWipPactsSince: undefined,
+      includeWipPactsSince: "2020-01-01",
     };
 
     const stateHandlers = {
