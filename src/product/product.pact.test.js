@@ -20,6 +20,7 @@ describe("Pact Verification", () => {
         ? [process.env.TRAVIS_BRANCH]
         : [],
       verbose: process.env.VERBOSE === "true",
+      enablePending: true,
     };
 
     // For builds triggered by a 'contract content changed' webhook,
@@ -38,24 +39,24 @@ describe("Pact Verification", () => {
         { tag: "prod", latest: true },
       ], // the new way of specifying which pacts to verify
       pactBrokerUrl: process.env.PACT_BROKER_BASE_URL,
-      enablePending: true,
+      enablePending: false,
       includeWipPactsSince: undefined,
     };
 
     const stateHandlers = {
       "products exists": () => {
         controller.repository.products = new Map([
-          ["10", new Product("10", "CREDIT_CARD", "28 Degrees", "v1")],
+          ["10", new Product("10", "CREDIT_CARD", "28 Degrees", "v1", "blue")],
         ]);
       },
       "products exist": () => {
         controller.repository.products = new Map([
-          ["10", new Product("10", "CREDIT_CARD", "28 Degrees", "v1")],
+          ["10", new Product("10", "CREDIT_CARD", "28 Degrees", "v1", "blue")],
         ]);
       },
       "a product with ID 10 exists": () => {
         controller.repository.products = new Map([
-          ["10", new Product("10", "CREDIT_CARD", "28 Degrees", "v1")],
+          ["10", new Product("10", "CREDIT_CARD", "28 Degrees", "v1", "blue")],
         ]);
       },
       "a product with ID 11 does not exist": () => {
